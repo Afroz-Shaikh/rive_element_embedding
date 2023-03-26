@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <base href="/" />
+
+    <meta charset="UTF-8" />
+    <meta content="IE=Edge" http-equiv="X-UA-Compatible" />
+    <meta name="description" content="A Flutter Web Element embedding demo." />
+
+    <!-- iOS meta tags & icons -->
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <meta
+      name="apple-mobile-web-app-title"
+      content="Flutter Element embedding"
+    />
+    <link rel="apple-touch-icon" href="icons/Icon-192.png" />
+    <link rel="preload" as="image" href="icons/unsplash-x9WGMWwp1NM.png" />
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="icons/favicon.png" />
+
+    <title>Element embedding</title>
+    <link rel="manifest" href="manifest.json" />
+
+    <!-- This script adds the flutter initialization JS code -->
+    <script src="flutter.js" defer></script>
+
+    <link rel="stylesheet" type="text/css" href="css/style.css" />
+  </head>
+  <body>
+    <section class="contents">
+      <article>
+        <div class="notch-container">
+          <div id="notch"></div>
+        </div>
+        <div id="flutter_target"></div>
+      </article>
+
+      <aside id="demo_controls">
+        <h1>Rive Example</h1>
+        <p>Element Embedding</p>
+
+        <fieldset id="interop">
+          <h3>Control Buttons</h3>
+
+          <div class="buttons">
+            <input id="forward" value="Forward" type="button" />
+            <input id="newpage" value="Jump&Move" type="button" />
+          </div>
+        </fieldset>
+      </aside>
+    </section>
+
+    <script>
+      window.addEventListener("load", function (ev) {
+        // Embed flutter into div#flutter_target
+        let target = document.querySelector("#flutter_target");
+        _flutter.loader.loadEntrypoint({
+          onEntrypointLoaded: async function (engineInitializer) {
+            let appRunner = await engineInitializer.initializeEngine({
+              hostElement: target,
+            });
+            await appRunner.runApp();
+          },
+        });
+      });
+    </script>
+    <script src="web/js/demo-js-interop.js" defer></script>
+  </body>
+</html>
